@@ -8,7 +8,6 @@ import { FaArrowDown } from "react-icons/fa6";
 import TokenSelector from './TokenSelector';
 
 const Wrapper = styled(FlexBox)`
-width: 100%;
 height: 100%;
 background-color: #191d21;
 flex-direction: column;
@@ -30,9 +29,10 @@ padding: 0.75rem;
 const Section = styled(FlexBox)`
 width: 100%;
 padding: 1rem;
-background: linear-gradient(80.26deg, rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%);
+/* background: linear-gradient(80.26deg, rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%); */
 border-radius: 8px;
-column-gap: 1rem;
+align-items: center;
+justify-content: space-between;
 `;
 
 const Container = styled(FlexBox)`
@@ -58,8 +58,9 @@ const StyledInput = styled.input`
 
 const Card = styled(FlexBox)`
 align-items: center;
-column-gap: 1rem;
-width: 100%;
+border-radius: 4px;
+padding:  0 0.75rem;
+background: linear-gradient(80.26deg, rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%);;
 `;
 
 const Image = styled.img`
@@ -78,7 +79,20 @@ const ImageContainer =  styled(FlexBox)`
     background: linear-gradient(80.26deg, rgb(61, 67, 73) -9.48%, rgb(55, 63, 72) 119.79%);
     justify-content: center;
     object-fit: contain;
+`;
 
+const CircleSwaper = styled(FlexBox)`
+box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 33px;
+ 
+    background: linear-gradient(rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    left: 44.5rem;
+    top: 33rem;
 `;
 
 const Exchanges = ({onDropdownClick}) => {
@@ -112,19 +126,12 @@ const Exchanges = ({onDropdownClick}) => {
           onSelectToken={handleTokenSelect}
         />
       )}
-    {/* <SmallCard>
-        <Button>
-            <FaArrowRightArrowLeft color='rgb(120, 122, 125)' size={16}/>
-            <H1 color='#787a7d'>Exchange</H1>
-        </Button>
-        <Button>
-            <FaArrowRightArrowLeft color='rgb(120, 122, 125)' size={16}/>
-            <H1 color='#787a7d'>DEX swap</H1>
-        </Button>
-    </SmallCard> */}
+    <CircleSwaper>
+    <FaArrowRightArrowLeft color='#fff'/>
+    </CircleSwaper>
     <Section>
-    <Card backgroundColor="red">
-  <FlexBox column rowGap="0.5rem"  padding="1rem">
+    <Card>
+  <FlexBox column rowGap="0.5rem"  padding="1rem" rowGap="1.5rem">
     <FlexBox columnGap="0.5rem" align="center">
       <FlexBox
         width="50px"
@@ -175,8 +182,8 @@ const Exchanges = ({onDropdownClick}) => {
     </FlexBox>
   </FlexBox>
 </Card>
-<Card backgroundColor="red">
-  <FlexBox column rowGap="0.5rem" padding="1rem">
+<Card >
+  <FlexBox column rowGap="0.5rem" padding="1rem" rowGap="1.85rem">
     <FlexBox columnGap="0.5rem" align="center" justify="end">
       <H5 bold color="#9b9b9b">Auto refreshes in {timeLeft} sec </H5>
       <FlexBox
