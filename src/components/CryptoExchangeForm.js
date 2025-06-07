@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { MdSwapCalls } from 'react-icons/md';
+import { FaArrowDown } from "react-icons/fa6";
 
 import FlexBox from '@/common/UI/FlexBox';
 import { Caption, H3 } from '@/common/UI/Headings';
@@ -81,16 +82,16 @@ const CurrencySelector = styled(FlexBox)`
 `;
 
 const SwapButton = styled(FlexBox)`
-  background-color: white;
-  border: 1px solid red;
-  width: 30px;
-  height: 30px;
-  border-radius: 34%;
+  background-color: #24203d;
+  border: 4px solid  #130f29;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 161px;
-  left: 152px;
+  top: 149px;
+  left: 146px;
   cursor: pointer;
 `;
 
@@ -129,7 +130,7 @@ const CurrencySection = ({ label, value, onChange, currency, onDropdownClick }) 
       <Input type="number" placeholder="0.00" value={value} onChange={onChange} />
       <CurrencySelector onClick={onDropdownClick}>
         <H3 color="#fff">{currency}</H3>
-        <IoMdArrowDropdown color="#fff" size={26} />
+        <FaArrowDown color="#fff" size={16} />
       </CurrencySelector>
     </CurrencyRow>
   </Section>
@@ -181,11 +182,11 @@ const CryptoExchangeForm = () => {
     setIsTokenSelectorOpen(true);
   };
 
-  const handleTokenSelect = (tokenSymbol) => {
+  const handleTokenSelect = (token) => {
     if (selectingCurrencyType === 'send') {
-      setSendCurrency(tokenSymbol);
+      setSendCurrency(token.tokenSymbol);
     } else if (selectingCurrencyType === 'receive') {
-      setReceiveCurrency(tokenSymbol);
+      setReceiveCurrency(token.tokenSymbol);
     }
     setIsTokenSelectorOpen(false);
   };
@@ -206,7 +207,7 @@ const CryptoExchangeForm = () => {
       />
 
       <SwapButton onClick={handleSwap}>
-        <MdSwapCalls color="red" size={18} />
+        <FaArrowDown color="#fff" size={14} />
       </SwapButton>
 
       <CurrencySection

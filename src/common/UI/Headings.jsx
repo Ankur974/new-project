@@ -27,7 +27,7 @@ export const Display = styled.h1`
   line-height: ${({ lineHeight }) => lineHeight || "2.5rem"};
 
   @media ${device.laptop} {
-    font-size: 2.25rem;
+    font-size: 1.6rem;
   }
 `;
 
