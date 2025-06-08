@@ -96,7 +96,9 @@ const SwapButton = styled(FlexBox)`
 `;
 
 const ActionButtonsContainer = styled.div`
-  margin-top: 20px;
+  background-color: transparent;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62);
+  padding: 0.5rem 0;
 `;
 
 const PrimaryButton = styled.button`
@@ -108,16 +110,20 @@ const PrimaryButton = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 `;
 
 const SecondaryButton = styled.button`
   width: 100%;
   padding: 15px;
-  background-color: #3a2a4a;
-  border: none;
+  border: 1px solid #e96461;
   border-radius: 8px;
-  color: #b0a0c0;
+  background-color: transparent;
+  color: #e96461;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 `;
 
 const CurrencySection = ({ label, value, onChange, currency, onDropdownClick }) => (

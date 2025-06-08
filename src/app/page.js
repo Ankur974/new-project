@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <Wrapper>
       <CryptoExchangeForm />
-      <Exchanges/>
+      {/* <Exchanges/> */}
     </Wrapper>
   );
 }
