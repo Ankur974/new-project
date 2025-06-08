@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { MdSwapCalls } from 'react-icons/md';
 import { FaArrowDown } from "react-icons/fa6";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 
 import FlexBox from '@/common/UI/FlexBox';
 import { Caption, H3 } from '@/common/UI/Headings';
@@ -68,6 +69,16 @@ const Input = styled.input`
   font-size: 1rem;
   width: 100%;
   outline: none;
+
+  /* Hide number input spinners for Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Hide number input spinners for Firefox */
+  -moz-appearance: textfield;
 
   :hover,
   :focus {
@@ -136,7 +147,7 @@ const CurrencySection = ({ label, value, onChange, currency, onDropdownClick }) 
       <Input type="number" placeholder="0.00" value={value} onChange={onChange} />
       <CurrencySelector onClick={onDropdownClick}>
         <H3 color="#fff">{currency}</H3>
-        <FaArrowDown color="#fff" size={16} />
+        <MdOutlineArrowDropDown color="#fff" size={24} />
       </CurrencySelector>
     </CurrencyRow>
   </Section>
