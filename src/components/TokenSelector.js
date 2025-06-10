@@ -315,7 +315,8 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
           <TokenCard>
             {tokenData.slice(0, 7).map((chain, index) => (
               <Card key={index}>
-                <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
+                {/* <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} /> */}
+                <Image src="/BTC.png" alt={chain.chain} />
               </Card>
             ))}
             <MoreIndicator onClick={() => setIsSelectingChain(true)}>
@@ -338,7 +339,8 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
             {filteredTokens.map((token, index) => (
               <TokenItem key={index} onClick={() => onSelectToken(token)}>
                 <TokenIcon>
-                  <Image src={token.tokenIcon} alt={token.tokenSymbol} />
+                  {/* <Image src={token.tokenIcon} alt={token.tokenSymbol} /> */}
+                  <Image src="/BTC.png" alt={token.tokenSymbol} />
                 </TokenIcon>
                 <TokenDetails>
                   <TokenSymbol>{token.tokenSymbol}</TokenSymbol>
