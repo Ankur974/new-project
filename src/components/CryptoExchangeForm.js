@@ -7,7 +7,7 @@ import FlexBox from "@/common/UI/FlexBox";
 import { Caption, H3 } from "@/common/UI/Headings";
 import TokenSelector from "./TokenSelector";
 
-const Container = styled(FlexBox)`
+const FormContainer = styled(FlexBox)`
   flex-direction: column;
   background-color: #36293b;
   border-radius: 16px;
@@ -20,9 +20,9 @@ const Container = styled(FlexBox)`
   position: relative;
 `;
 
-const TabsContainer = styled(FlexBox)`
+const ExchangeTabs = styled(FlexBox)`
   border: 1px solid #673e60;
-  border-radius: 1rem;
+  border-radius: 0.4rem;
   padding: 4px;
   width: 100%;
 `;
@@ -31,7 +31,7 @@ const TabButton = styled.button`
   flex: 1;
   padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.4rem;
   cursor: pointer;
   font-weight: bold;
   font-size: 0.75rem;
@@ -40,7 +40,7 @@ const TabButton = styled.button`
   color: ${({ $active }) => ($active ? "white" : "#b0a0c0")};
 `;
 
-const Section = styled(FlexBox)`
+const CurrencySection = styled(FlexBox)`
   background-color: #27212b;
   border-radius: 0.5rem;
   flex-direction: column;
@@ -50,7 +50,7 @@ const Section = styled(FlexBox)`
   width: 100%;
 `;
 
-const TextContainer = styled(FlexBox)`
+const SectionHeader = styled(FlexBox)`
   width: 100%;
   justify-content: space-between;
 `;
@@ -61,7 +61,7 @@ const CurrencyRow = styled(FlexBox)`
   align-items: center;
 `;
 
-const Input = styled.input`
+const CurrencyInput = styled.input`
   background-color: #27212b;
   border: none;
   color: #fff;
@@ -89,6 +89,7 @@ const Input = styled.input`
 const CurrencySelector = styled(FlexBox)`
   column-gap: 1rem;
   align-items: center;
+  cursor: pointer;
 `;
 
 const SwapButton = styled(FlexBox)`
@@ -105,9 +106,8 @@ const SwapButton = styled(FlexBox)`
   cursor: pointer;
 `;
 
-const ActionButtonsContainer = styled.div`
+const ActionButtons = styled.div`
   background-color: transparent;
-  /* box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62); */
   padding: 0.5rem 0;
 `;
 
@@ -136,20 +136,20 @@ const SecondaryButton = styled.button`
   transition: background-color 0.3s, color 0.3s;
 `;
 
-const CurrencySection = ({
+const CurrencyInputSection = ({
   label,
   value,
   onChange,
   currency,
   onDropdownClick,
 }) => (
-  <Section>
-    <TextContainer>
+  <CurrencySection>
+    <SectionHeader>
       <Caption color="#a0789c">{label}</Caption>
       <Caption color="#a0789c">Form</Caption>
-    </TextContainer>
+    </SectionHeader>
     <CurrencyRow>
-      <Input
+      <CurrencyInput
         type="number"
         placeholder="0.00"
         value={value}
@@ -160,7 +160,7 @@ const CurrencySection = ({
         <MdOutlineArrowDropDown color="#fff" size={24} />
       </CurrencySelector>
     </CurrencyRow>
-  </Section>
+  </CurrencySection>
 );
 
 const CryptoExchangeForm = () => {
@@ -169,9 +169,8 @@ const CryptoExchangeForm = () => {
   const [receiveValue, setReceiveValue] = useState("");
   const [receiveCurrency, setReceiveCurrency] = useState("ETH");
   const [isTokenSelectorOpen, setIsTokenSelectorOpen] = useState(false);
-  const [selectingCurrencyType, setSelectingCurrencyType] = useState(null); // 'send' or 'receive'
+  const [selectingCurrencyType, setSelectingCurrencyType] = useState(null);
 
-  // Hardcoded conversion rate for BTC -> ETH and vice versa
   const conversionRates = {
     BTC: { ETH: 15 },
     ETH: { BTC: 1 / 15 },
@@ -219,13 +218,13 @@ const CryptoExchangeForm = () => {
   };
 
   return (
-    <Container>
-      <TabsContainer>
+    <FormContainer>
+      <ExchangeTabs>
         <TabButton $active={true}>Exchange crypto</TabButton>
         <TabButton $active={false}>Buy/Sell crypto</TabButton>
-      </TabsContainer>
+      </ExchangeTabs>
 
-      <CurrencySection
+      <CurrencyInputSection
         label="You send"
         value={sendValue}
         onChange={handleSendChange}
@@ -237,7 +236,7 @@ const CryptoExchangeForm = () => {
         <FaArrowDown color="#fff" size={14} />
       </SwapButton>
 
-      <CurrencySection
+      <CurrencyInputSection
         label="You get"
         value={receiveValue}
         onChange={handleReceiveChange}
@@ -245,19 +244,18 @@ const CryptoExchangeForm = () => {
         onDropdownClick={() => handleDropdownClick("receive")}
       />
 
-      <ActionButtonsContainer>
+      <ActionButtons>
         <PrimaryButton>VIEW OFFERS</PrimaryButton>
         <SecondaryButton>QUICK EXCHANGE</SecondaryButton>
-      </ActionButtonsContainer>
+      </ActionButtons>
 
       {isTokenSelectorOpen && (
         <TokenSelector
           onClose={() => setIsTokenSelectorOpen(false)}
           onSelectToken={handleTokenSelect}
-          selectingCurrencyType={selectingCurrencyType}
         />
       )}
-    </Container>
+    </FormContainer>
   );
 };
 
