@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { MdSwapCalls } from 'react-icons/md';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { FaArrowDown } from "react-icons/fa6";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
-import FlexBox from '@/common/UI/FlexBox';
-import { Caption, H3 } from '@/common/UI/Headings';
-import TokenSelector from './TokenSelector';
+import FlexBox from "@/common/UI/FlexBox";
+import { Caption, H3 } from "@/common/UI/Headings";
+import TokenSelector from "./TokenSelector";
 
 const Container = styled(FlexBox)`
   flex-direction: column;
@@ -15,7 +13,8 @@ const Container = styled(FlexBox)`
   border-radius: 16px;
   padding: 24px;
   color: white;
-  font-family: Roboto, Quicksand, "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: Roboto, Quicksand, "Source Sans Pro", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   width: fit-content;
   row-gap: 1rem;
   position: relative;
@@ -37,8 +36,8 @@ const TabButton = styled.button`
   font-weight: bold;
   font-size: 0.75rem;
   transition: background-color 0.3s ease;
-  background-color: ${({ $active }) => ($active ? '#e96461' : 'transparent')};
-  color: ${({ $active }) => ($active ? 'white' : '#b0a0c0')};
+  background-color: ${({ $active }) => ($active ? "#e96461" : "transparent")};
+  color: ${({ $active }) => ($active ? "white" : "#b0a0c0")};
 `;
 
 const Section = styled(FlexBox)`
@@ -94,7 +93,7 @@ const CurrencySelector = styled(FlexBox)`
 
 const SwapButton = styled(FlexBox)`
   background-color: #24203d;
-  border: 4px solid  #130f29;
+  border: 4px solid #130f29;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -108,7 +107,7 @@ const SwapButton = styled(FlexBox)`
 
 const ActionButtonsContainer = styled.div`
   background-color: transparent;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62);
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62); */
   padding: 0.5rem 0;
 `;
 
@@ -137,14 +136,25 @@ const SecondaryButton = styled.button`
   transition: background-color 0.3s, color 0.3s;
 `;
 
-const CurrencySection = ({ label, value, onChange, currency, onDropdownClick }) => (
+const CurrencySection = ({
+  label,
+  value,
+  onChange,
+  currency,
+  onDropdownClick,
+}) => (
   <Section>
     <TextContainer>
       <Caption color="#a0789c">{label}</Caption>
       <Caption color="#a0789c">Form</Caption>
     </TextContainer>
     <CurrencyRow>
-      <Input type="number" placeholder="0.00" value={value} onChange={onChange} />
+      <Input
+        type="number"
+        placeholder="0.00"
+        value={value}
+        onChange={onChange}
+      />
       <CurrencySelector onClick={onDropdownClick}>
         <H3 color="#fff">{currency}</H3>
         <MdOutlineArrowDropDown color="#fff" size={24} />
@@ -154,10 +164,10 @@ const CurrencySection = ({ label, value, onChange, currency, onDropdownClick }) 
 );
 
 const CryptoExchangeForm = () => {
-  const [sendValue, setSendValue] = useState('');
-  const [sendCurrency, setSendCurrency] = useState('BTC');
-  const [receiveValue, setReceiveValue] = useState('');
-  const [receiveCurrency, setReceiveCurrency] = useState('ETH');
+  const [sendValue, setSendValue] = useState("");
+  const [sendCurrency, setSendCurrency] = useState("BTC");
+  const [receiveValue, setReceiveValue] = useState("");
+  const [receiveCurrency, setReceiveCurrency] = useState("ETH");
   const [isTokenSelectorOpen, setIsTokenSelectorOpen] = useState(false);
   const [selectingCurrencyType, setSelectingCurrencyType] = useState(null); // 'send' or 'receive'
 
@@ -176,14 +186,14 @@ const CryptoExchangeForm = () => {
     const value = e.target.value;
     setSendValue(value);
     const converted = convert(value, sendCurrency, receiveCurrency);
-    setReceiveValue(value ? converted : '');
+    setReceiveValue(value ? converted : "");
   };
 
   const handleReceiveChange = (e) => {
     const value = e.target.value;
     setReceiveValue(value);
     const converted = convert(value, receiveCurrency, sendCurrency);
-    setSendValue(value ? converted : '');
+    setSendValue(value ? converted : "");
   };
 
   const handleSwap = () => {
@@ -200,9 +210,9 @@ const CryptoExchangeForm = () => {
   };
 
   const handleTokenSelect = (token) => {
-    if (selectingCurrencyType === 'send') {
+    if (selectingCurrencyType === "send") {
       setSendCurrency(token.tokenSymbol);
-    } else if (selectingCurrencyType === 'receive') {
+    } else if (selectingCurrencyType === "receive") {
       setReceiveCurrency(token.tokenSymbol);
     }
     setIsTokenSelectorOpen(false);
@@ -220,7 +230,7 @@ const CryptoExchangeForm = () => {
         value={sendValue}
         onChange={handleSendChange}
         currency={sendCurrency}
-        onDropdownClick={() => handleDropdownClick('send')}
+        onDropdownClick={() => handleDropdownClick("send")}
       />
 
       <SwapButton onClick={handleSwap}>
@@ -232,7 +242,7 @@ const CryptoExchangeForm = () => {
         value={receiveValue}
         onChange={handleReceiveChange}
         currency={receiveCurrency}
-        onDropdownClick={() => handleDropdownClick('receive')}
+        onDropdownClick={() => handleDropdownClick("receive")}
       />
 
       <ActionButtonsContainer>

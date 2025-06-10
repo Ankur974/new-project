@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { IoSearchOutline } from 'react-icons/io5';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { IoSearchOutline } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
-import FlexBox from '@/common/UI/FlexBox';
-import { H2 } from '@/common/UI/Headings';
+
+import FlexBox from "@/common/UI/FlexBox";
+import { H2 } from "@/common/UI/Headings";
 import tokenData from "../data/tokensData";
 
 const Container = styled(FlexBox)`
@@ -141,12 +142,12 @@ const NetworkTag = styled.div`
 `;
 
 const TokenSelector = ({ onClose, onSelectToken }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isSelectingChain, setIsSelectingChain] = useState(false);
 
   // Flatten token data
-  const allTokens = tokenData.flatMap(chain =>
-    chain.tokens.map(token => ({
+  const allTokens = tokenData.flatMap((chain) =>
+    chain.tokens.map((token) => ({
       ...token,
       chain: chain.chain,
       chainId: chain.chainId,
@@ -154,9 +155,10 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
   );
 
   // Filter tokens
-  const filteredTokens = allTokens.filter(token =>
-    token.tokenSymbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    token.tokenName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredTokens = allTokens.filter(
+    (token) =>
+      token.tokenSymbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      token.tokenName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -165,8 +167,22 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
         // Chain Selection UI
         <>
           <Header padding="0.5rem 0">
-            <FaArrowLeft size={20} color='#ffffff' onClick={() => setIsSelectingChain(false)} />
-            <H2 color='#ffffff' bold style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>Select chain</H2>
+            <FaArrowLeft
+              size={20}
+              color="#ffffff"
+              onClick={() => setIsSelectingChain(false)}
+            />
+            <H2
+              color="#ffffff"
+              bold
+              style={{
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              Select chain
+            </H2>
           </Header>
 
           <SearchContainer>
@@ -181,30 +197,47 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
 
           {/* Chain list */}
           <TokenList>
-            {tokenData.filter(chain => chain.chain.toLowerCase().includes(searchTerm.toLowerCase())).map((chain, index) => (
-              <TokenItem key={index} onClick={() => {
-                // Handle chain selection - maybe filter tokens based on selected chain
-                console.log('Selected chain:', chain);
-                setIsSelectingChain(false); // Go back to token selection after selecting chain
-                setSearchTerm(''); // Clear search term
-                // You might want to add logic here to filter the allTokens list based on the selected chain
-              }}>
-                <TokenIcon>
-                  <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
-                </TokenIcon>
-                <TokenDetails>
-                  <TokenSymbol>{chain.chain}</TokenSymbol>
-                </TokenDetails>
-              </TokenItem>
-            ))}
+            {tokenData
+              .filter((chain) =>
+                chain.chain.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((chain, index) => (
+                <TokenItem
+                  key={index}
+                  onClick={() => {
+                    // Handle chain selection - maybe filter tokens based on selected chain
+                    console.log("Selected chain:", chain);
+                    setIsSelectingChain(false); // Go back to token selection after selecting chain
+                    setSearchTerm(""); // Clear search term
+                    // You might want to add logic here to filter the allTokens list based on the selected chain
+                  }}
+                >
+                  <TokenIcon>
+                    <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
+                  </TokenIcon>
+                  <TokenDetails>
+                    <TokenSymbol>{chain.chain}</TokenSymbol>
+                  </TokenDetails>
+                </TokenItem>
+              ))}
           </TokenList>
         </>
       ) : (
         // Token Selection UI (Existing)
         <>
           <Header padding="0.5rem 0">
-            <FaArrowLeft size={20} color='#ffffff' onClick={onClose} />
-            <H2 color='#ffffff' bold style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>Exchange From</H2>
+            <FaArrowLeft size={20} color="#ffffff" onClick={onClose} />
+            <H2
+              color="#ffffff"
+              bold
+              style={{
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              Exchange From
+            </H2>
           </Header>
 
           <TokenCard>
@@ -213,7 +246,9 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
                 <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
               </Card>
             ))}
-            <MoreIndicator onClick={() => setIsSelectingChain(true)}>+{tokenData.length - 7}</MoreIndicator>
+            <MoreIndicator onClick={() => setIsSelectingChain(true)}>
+              +{tokenData.length - 7}
+            </MoreIndicator>
           </TokenCard>
 
           <SearchContainer>
@@ -235,9 +270,7 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
                 </TokenIcon>
                 <TokenDetails>
                   <TokenSymbol>{token.tokenSymbol}</TokenSymbol>
-                  <TokenName>
-                    {token.tokenName}
-                  </TokenName>
+                  <TokenName>{token.tokenName}</TokenName>
                 </TokenDetails>
               </TokenItem>
             ))}

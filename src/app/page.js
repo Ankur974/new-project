@@ -1,29 +1,31 @@
 "use client";
 
+import styled from "styled-components";
+import "@/app/globals.css";
+
 import FlexBox from "@/common/UI/FlexBox";
-import { Body1, Display } from "@/common/UI/Headings";
 import CryptoExchangeForm from "@/components/CryptoExchangeForm";
 import Exchanges from "@/components/Exchanges";
-import styled from "styled-components";
-
-const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.primary};
-`;
 
 const Wrapper = styled(FlexBox)`
-width: 100%;
-height: 100%;
-flex-direction: column;
-row-gap:1rem;
-align-items: center;
-
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(227, 87, 96, 0.5) 50%,
+    rgba(227, 87, 96, 0.62) 100%
+  );
 `;
 
 export default function Home() {
   return (
     <Wrapper>
       <CryptoExchangeForm />
-      {/* <Exchanges/> */}
+      <Exchanges />
     </Wrapper>
   );
 }
