@@ -9,7 +9,7 @@ import TokenSelector from "./TokenSelector";
 
 const FormContainer = styled(FlexBox)`
   flex-direction: column;
-  background-color: #36293b;
+  background: linear-gradient(180deg, rgb(52, 57, 62) 0%, rgb(21, 25, 30) 100%);
   border-radius: 16px;
   padding: 24px;
   color: white;
@@ -93,8 +93,7 @@ const CurrencySelector = styled(FlexBox)`
 `;
 
 const SwapButton = styled(FlexBox)`
-  background-color: #24203d;
-  border: 4px solid #130f29;
+  background: linear-gradient(180deg, rgb(52, 57, 62) 0%, rgb(21, 25, 30) 100%);
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -122,6 +121,16 @@ const PrimaryButton = styled.button`
   margin-bottom: 10px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  &:hover {
+    background: linear-gradient(45deg, #ff6b68, #ff7b78);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 100, 97, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 const SecondaryButton = styled.button`

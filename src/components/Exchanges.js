@@ -9,7 +9,6 @@ import TokenSelector from "./TokenSelector";
 
 const Wrapper = styled(FlexBox)`
   height: 100%;
-  background-color: #191d21;
   flex-direction: column;
 `;
 
@@ -29,7 +28,6 @@ const Section = styled(FlexBox)`
   width: 100%;
   padding: 1rem;
   border-radius: 8px;
-  align-items: center;
   justify-content: space-between;
 `;
 
@@ -55,12 +53,13 @@ const StyledInput = styled.input`
   color: white;
   font-size: 1.2rem;
   flex-grow: 1;
-  padding: 0.5rem;
+  padding: 0.5rem 1.25rem;
+
 `;
 
 const Card = styled(FlexBox)`
   align-items: center;
-  border-radius: 4px;
+  border-radius: ${props => props.borderRadius || '4px'};
   padding: 0 0.75rem;
   background: linear-gradient(
     80.26deg,
@@ -100,7 +99,16 @@ const CircleSwaper = styled(FlexBox)`
   align-items: center;
   justify-content: center;
   left: 44.5rem;
-  top: 33rem;
+  top: 12rem;
+`;
+
+const InputContainerSmallBox = styled(FlexBox)`
+  column-gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(80.26deg, rgb(42, 47, 52) 0%, rgb(31, 35, 40) 100%);
+  border-radius: 0 4px 4px 0;
 `;
 
 const Exchanges = ({ onDropdownClick }) => {
@@ -132,13 +140,19 @@ const Exchanges = ({ onDropdownClick }) => {
         <TokenSelector
           onClose={() => setShowTokenSelector(false)}
           onSelectToken={handleTokenSelect}
+          cardWidth={400}
+          top="auto"
+          left="auto"
+          right="auto"
+          
+     
         />
       )}
       <CircleSwaper>
         <FaArrowRightArrowLeft color="#fff" />
       </CircleSwaper>
       <Section>
-        <Card>
+        <Card borderRadius="4px 0 0 4px">
           <FlexBox column rowGap="0.5rem" padding="1rem" rowGap="1.5rem">
             <FlexBox columnGap="0.5rem" align="center">
               <FlexBox
@@ -153,18 +167,13 @@ const Exchanges = ({ onDropdownClick }) => {
                   1 OF 5
                 </H6>
               </FlexBox>
-              <H1 color="white">Start exchange</H1>
+              <H4 color="white" bold>Start exchange</H4>
             </FlexBox>
 
             <FlexBox column rowGap="0.5rem">
               <Container>
                 <StyledInput type="text" placeholder="0.0" />
-                <FlexBox
-                  columnGap="1rem"
-                  padding="1rem"
-                  align="center"
-                  justify="center"
-                  backgroundColor="linear-gradient(80.26deg, rgb(42, 47, 52) 0%, rgb(31, 35, 40) 100%)"
+                <InputContainerSmallBox
                 >
                   <ImageContainer>
                     <Image src="/BTC.png" alt="BTC" />
@@ -176,7 +185,7 @@ const Exchanges = ({ onDropdownClick }) => {
                   <FlexBox onClick={() => setShowTokenSelector(true)}>
                     <FaArrowDown color="#fff" size={16} />
                   </FlexBox>
-                </FlexBox>
+                </InputContainerSmallBox>
               </Container>
 
               <FlexBox justifyContent="space-between" columnGap="0.5rem">
@@ -192,7 +201,7 @@ const Exchanges = ({ onDropdownClick }) => {
             </FlexBox>
           </FlexBox>
         </Card>
-        <Card>
+        <Card borderRadius="0 8px 8px 0">
           <FlexBox column rowGap="0.5rem" padding="1rem" rowGap="1.85rem">
             <FlexBox columnGap="0.5rem" align="center" justify="end">
               <H5 bold color="#9b9b9b">
@@ -245,13 +254,7 @@ const Exchanges = ({ onDropdownClick }) => {
             <FlexBox column rowGap="0.5rem">
               <Container>
                 <StyledInput type="text" placeholder="0.0" />
-                <FlexBox
-                  columnGap="1rem"
-                  padding="1rem"
-                  align="center"
-                  justify="center"
-                  backgroundColor="linear-gradient(80.26deg, rgb(42, 47, 52) 0%, rgb(31, 35, 40) 100%)"
-                >
+                <InputContainerSmallBox>
                   <ImageContainer>
                     <Image src="/BTC.png" alt="BTC" />
                   </ImageContainer>
@@ -259,10 +262,10 @@ const Exchanges = ({ onDropdownClick }) => {
                     <H1 color="#f5f5f5">BTC</H1>
                     <H5 color="#96a0ab">BTC</H5>
                   </FlexBox>
-                  <FlexBox>
-                    <H3 color="#f5f5f5">▼</H3>
+                  <FlexBox onClick={() => setShowTokenSelector(true)}>
+                    <FaArrowDown color="#fff" size={16} />
                   </FlexBox>
-                </FlexBox>
+                </InputContainerSmallBox>
               </Container>
 
               <FlexBox justifyContent="space-between" columnGap="0.5rem">

@@ -30,16 +30,20 @@ const fadeIn = keyframes`
 
 const Container = styled(FlexBox)`
   flex-direction: column;
-  background-color: ${colors.background.dark};
+  background: linear-gradient(180deg, rgb(52, 57, 62) 0%, rgb(21, 25, 30) 100%);
   border-radius: 16px;
   padding: 1rem;
   color: white;
-  width: 100%;
+  width: ${props => props.cardWidth ? `${props.cardWidth}px` : '100%'};
   height: 80vh;
   position: absolute;
   inset: 0;
   z-index: 10;
   animation: ${slideIn} 0.3s ease-out;
+  top: ${props => props.top || '0'};
+  left: ${props => props.left || '0'};
+  right: ${props => props.right || '0'};
+  bottom: ${props => props.bottom || '0'};
 `;
 
 const Header = styled(FlexBox)`
@@ -51,11 +55,13 @@ const Header = styled(FlexBox)`
 `;
 
 const TokenCard = styled(FlexBox)`
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  justify-content: flex-start;
-  animation: ${fadeIn} 0.3s ease-out;
+     flex-wrap: wrap;
+    gap: 1rem
+;
+    margin-top: 1rem;
+    animation: jBcSpD 0.3s ease-out;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Card = styled(FlexBox)`
@@ -172,8 +178,7 @@ const TokenItem = styled.div`
   }
 `;
 
-const TokenIcon = styled.div`
-  width: 35px;
+const TokenIcon = styled.div`  width: 35px;
   height: 35px;
   background-color: transparent;
   border-radius: 50%;
@@ -213,7 +218,7 @@ const NetworkTag = styled.div`
   border-radius: 4px;
 `;
 
-const TokenSelector = ({ onClose, onSelectToken }) => {
+const TokenSelector = ({ onClose, onSelectToken, cardWidth }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isSelectingChain, setIsSelectingChain] = useState(false);
 
@@ -234,7 +239,7 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
   );
 
   return (
-    <Container>
+    <Container cardWidth={cardWidth}>
       {isSelectingChain ? (
         // Chain Selection UI
         <>
@@ -356,3 +361,4 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
 };
 
 export default TokenSelector;
+
