@@ -1,6 +1,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #e35760;
+  --primary-light: rgba(227, 87, 96, 0.5);
+  --primary-dark: rgba(227, 87, 96, 0.62);
+  --overlay-dark: rgba(0, 0, 0, 0.2);
+  --overlay-light: rgba(255, 255, 255, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
