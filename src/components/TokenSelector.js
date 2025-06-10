@@ -1,15 +1,36 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
 
 import FlexBox from "@/common/UI/FlexBox";
 import { H2 } from "@/common/UI/Headings";
 import tokenData from "../data/tokensData";
+import { colors } from "@/lib/colors";
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const Container = styled(FlexBox)`
   flex-direction: column;
-  background-color: #130f29;
+  background-color: ${colors.background.dark};
   border-radius: 16px;
   padding: 1rem;
   color: white;
@@ -18,13 +39,15 @@ const Container = styled(FlexBox)`
   position: absolute;
   inset: 0;
   z-index: 10;
+  animation: ${slideIn} 0.3s ease-out;
 `;
 
 const Header = styled(FlexBox)`
   justify-content: space-between;
   align-items: center;
-  color: #a0789c;
+  color: ${colors.text.light};
   position: relative;
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
 const TokenCard = styled(FlexBox)`
@@ -32,57 +55,86 @@ const TokenCard = styled(FlexBox)`
   gap: 0.5rem;
   margin-top: 1rem;
   justify-content: flex-start;
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
 const Card = styled(FlexBox)`
-  background-color: #24203d;
+  background-color: ${colors.overlay.dark};
   width: 60px;
   height: 50px;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
   position: relative;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: ${colors.primary.light};
+  }
 `;
 
 const Image = styled.img`
   width: 35px;
   height: 35px;
   object-fit: contain;
+  transition: transform 0.2s ease;
+
+  ${Card}:hover & {
+    transform: scale(1.1);
+  }
 `;
 
 const MoreIndicator = styled(FlexBox)`
-  background-color: #24203d;
+  background-color: ${colors.overlay.dark};
   width: 60px;
   height: 50px;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: ${colors.text.light};
   font-size: 0.8rem;
   font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: ${colors.primary.light};
+  }
 `;
 
 const SearchContainer = styled(FlexBox)`
   align-items: center;
-  background-color: #27212b;
+  background-color: ${colors.overlay.dark};
   border-radius: 8px;
   padding: 0.75rem;
   margin-top: 1.2rem;
+  transition: background-color 0.2s ease;
+  animation: ${fadeIn} 0.3s ease-out;
+
+  &:focus-within {
+    background-color: ${colors.primary.light};
+  }
 `;
 
 const SearchInput = styled.input`
   flex: 1;
   background: none;
   border: none;
-  color: #92909e;
+  color: ${colors.text.light};
   font-size: 1rem;
   outline: none;
   font-weight: 400;
+
+  &::placeholder {
+    color: ${colors.text.light}80;
+  }
 `;
 
 const SearchIcon = styled(IoSearchOutline)`
   margin-left: 8px;
-  color: #fff;
+  color: ${colors.text.light};
 `;
 
 const TokenList = styled.div`
@@ -90,14 +142,34 @@ const TokenList = styled.div`
   flex: 1;
   overflow-y: auto;
   max-height: 500px;
+  animation: ${fadeIn} 0.3s ease-out;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${colors.overlay.dark};
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.primary.main};
+    border-radius: 3px;
+  }
 `;
 
 const TokenItem = styled.div`
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid #2f2936;
+  border-bottom: 1px solid ${colors.overlay.dark};
   cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: ${colors.primary.light};
+  }
 `;
 
 const TokenIcon = styled.div`
@@ -122,12 +194,12 @@ const TokenDetails = styled.div`
 const TokenSymbol = styled.div`
   font-weight: bold;
   font-size: 1rem;
-  color: #ffffff;
+  color: ${colors.text.light};
 `;
 
 const TokenName = styled.div`
   font-size: 0.9rem;
-  color: #b0a0c0;
+  color: ${colors.text.light}80;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -135,8 +207,8 @@ const TokenName = styled.div`
 
 const NetworkTag = styled.div`
   font-size: 0.7rem;
-  color: #e96461;
-  background-color: rgba(233, 100, 97, 0.1);
+  color: ${colors.primary.main};
+  background-color: ${colors.primary.light};
   padding: 2px 6px;
   border-radius: 4px;
 `;
