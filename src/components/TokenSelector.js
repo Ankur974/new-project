@@ -7,7 +7,7 @@ import FlexBox from "@/common/UI/FlexBox";
 import { H2 } from "@/common/UI/Headings";
 import tokenData from "../data/tokensData";
 
-const Container = styled(FlexBox)`
+const SelectorContainer = styled(FlexBox)`
   flex-direction: column;
   background-color: #362a3b;
   border-radius: 16px;
@@ -20,21 +20,29 @@ const Container = styled(FlexBox)`
   z-index: 10;
 `;
 
-const Header = styled(FlexBox)`
+const SelectorHeader = styled(FlexBox)`
   justify-content: space-between;
   align-items: center;
   color: #a0789c;
   position: relative;
+  padding: 0.5rem 0;
 `;
 
-const TokenCard = styled(FlexBox)`
+const HeaderTitle = styled(H2)`
+  color: #ffffff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const TokenGrid = styled(FlexBox)`
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
   justify-content: center;
 `;
 
-const Card = styled(FlexBox)`
+const TokenGridItem = styled(FlexBox)`
   background-color: #24203d;
   width: 60px;
   height: 50px;
@@ -44,13 +52,13 @@ const Card = styled(FlexBox)`
   position: relative;
 `;
 
-const Image = styled.img`
+const TokenImage = styled.img`
   width: 35px;
   height: 35px;
   object-fit: contain;
 `;
 
-const MoreIndicator = styled(FlexBox)`
+const MoreButton = styled(FlexBox)`
   background-color: #24203d;
   width: 60px;
   height: 50px;
@@ -60,9 +68,10 @@ const MoreIndicator = styled(FlexBox)`
   color: #fff;
   font-size: 0.8rem;
   font-weight: bold;
+  cursor: pointer;
 `;
 
-const SearchContainer = styled(FlexBox)`
+const SearchWrapper = styled(FlexBox)`
   align-items: center;
   background-color: #27212b;
   border-radius: 8px;
@@ -70,7 +79,7 @@ const SearchContainer = styled(FlexBox)`
   margin-top: 1.2rem;
 `;
 
-const SearchInput = styled.input`
+const SearchField = styled.input`
   flex: 1;
   background: none;
   border: none;
@@ -85,14 +94,14 @@ const SearchIcon = styled(IoSearchOutline)`
   color: #fff;
 `;
 
-const TokenList = styled.div`
+const TokenListContainer = styled.div`
   margin-top: 1rem;
   flex: 1;
   overflow-y: auto;
   max-height: 500px;
 `;
 
-const TokenItem = styled.div`
+const TokenListItem = styled.div`
   display: flex;
   align-items: center;
   padding: 12px 0;
@@ -100,7 +109,7 @@ const TokenItem = styled.div`
   cursor: pointer;
 `;
 
-const TokenIcon = styled.div`
+const TokenIconWrapper = styled.div`
   width: 35px;
   height: 35px;
   background-color: transparent;
@@ -112,7 +121,7 @@ const TokenIcon = styled.div`
   justify-content: center;
 `;
 
-const TokenDetails = styled.div`
+const TokenInfo = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -133,12 +142,16 @@ const TokenName = styled.div`
   gap: 8px;
 `;
 
-const NetworkTag = styled.div`
+const NetworkBadge = styled.div`
   font-size: 0.7rem;
   color: #e96461;
   background-color: rgba(233, 100, 97, 0.1);
   padding: 2px 6px;
   border-radius: 4px;
+`;
+
+const BackButton = styled(FaArrowLeft)`
+  cursor: pointer;
 `;
 
 const TokenSelector = ({ onClose, onSelectToken }) => {
@@ -162,125 +175,107 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
   );
 
   return (
-    <Container>
+    <SelectorContainer>
       {isSelectingChain ? (
         // Chain Selection UI
         <>
-          <Header padding="0.5rem 0">
-            <FaArrowLeft
+          <SelectorHeader>
+            <BackButton
               size={20}
               color="#ffffff"
               onClick={() => setIsSelectingChain(false)}
             />
-            <H2
-              color="#ffffff"
-              bold
-              style={{
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              Select chain
-            </H2>
-          </Header>
+            <HeaderTitle bold>Select chain</HeaderTitle>
+          </SelectorHeader>
 
-          <SearchContainer>
-            <SearchInput
+          <SearchWrapper>
+            <SearchField
               type="text"
               placeholder="Search by chain name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <SearchIcon size={20} />
-          </SearchContainer>
+          </SearchWrapper>
 
-          {/* Chain list */}
-          <TokenList>
+          <TokenListContainer>
             {tokenData
               .filter((chain) =>
                 chain.chain.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map((chain, index) => (
-                <TokenItem
+                <TokenListItem
                   key={index}
                   onClick={() => {
                     console.log("Selected chain:", chain);
-                    setIsSelectingChain(false); 
+                    setIsSelectingChain(false);
                     setSearchTerm("");
                   }}
                 >
-                  <TokenIcon>
-                    {/* <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} /> */}
-                    <Image src="BTC.png"/>
-                  </TokenIcon>
-                  <TokenDetails>
+                  <TokenIconWrapper>
+                    <TokenImage src="BTC.png" alt={chain.chain} />
+                  </TokenIconWrapper>
+                  <TokenInfo>
                     <TokenSymbol>{chain.chain}</TokenSymbol>
-                  </TokenDetails>
-                </TokenItem>
+                  </TokenInfo>
+                </TokenListItem>
               ))}
-          </TokenList>
+          </TokenListContainer>
         </>
       ) : (
-        // Token Selection UI (Existing)
+        // Token Selection UI
         <>
-          <Header padding="0.5rem 0">
-            <FaArrowLeft size={20} color="#ffffff" onClick={onClose} />
-            <H2
-              color="#ffffff"
-              bold
-              style={{
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              Exchange From
-            </H2>
-          </Header>
+          <SelectorHeader>
+            <BackButton size={20} color="#ffffff" onClick={onClose} />
+            <HeaderTitle bold>Exchange From</HeaderTitle>
+          </SelectorHeader>
 
-          <TokenCard>
+          <TokenGrid>
             {tokenData.slice(0, 7).map((chain, index) => (
-              <Card key={index}>
-                {/* <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} /> */}
-                <Image src="BTC.png"/>
-
-              </Card>
+              <TokenGridItem key={index}>
+                <TokenImage src="BTC.png" alt={chain.chain} />
+              </TokenGridItem>
             ))}
-            <MoreIndicator onClick={() => setIsSelectingChain(true)}>
-              +{tokenData.length - 7}
-            </MoreIndicator>
-          </TokenCard>
+            <MoreButton onClick={() => setIsSelectingChain(true)}>
+              More
+            </MoreButton>
+          </TokenGrid>
 
-          <SearchContainer>
-            <SearchInput
+          <SearchWrapper>
+            <SearchField
               type="text"
-              placeholder="Search by token name"
+              placeholder="Search by token name or symbol"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <SearchIcon size={20} />
-          </SearchContainer>
+          </SearchWrapper>
 
-          {/* Token list */}
-          <TokenList>
+          <TokenListContainer>
             {filteredTokens.map((token, index) => (
-              <TokenItem key={index} onClick={() => onSelectToken(token)}>
-                <TokenIcon>
-                  {/* <Image src={token.tokenIcon} alt={token.tokenSymbol} /> */}
-                                      <Image src="BTC.png"/>
-
-                </TokenIcon>
-                <TokenDetails>
+              <TokenListItem
+                key={index}
+                onClick={() => {
+                  onSelectToken(token);
+                  onClose();
+                }}
+              >
+                <TokenIconWrapper>
+                  <TokenImage src={token.tokenIcon} alt={token.tokenSymbol} />
+                </TokenIconWrapper>
+                <TokenInfo>
                   <TokenSymbol>{token.tokenSymbol}</TokenSymbol>
-                  <TokenName>{token.tokenName}</TokenName>
-                </TokenDetails>
-              </TokenItem>
+                  <TokenName>
+                    {token.tokenName}
+                    <NetworkBadge>{token.chain}</NetworkBadge>
+                  </TokenName>
+                </TokenInfo>
+              </TokenListItem>
             ))}
-          </TokenList>
+          </TokenListContainer>
         </>
       )}
-    </Container>
+    </SelectorContainer>
   );
 };
 
