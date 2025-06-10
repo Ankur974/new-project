@@ -58,7 +58,7 @@ const StyledInput = styled.input`
 
 const Card = styled(FlexBox)`
 align-items: center;
-border-radius: 4px;
+border-radius: ${props => props.borderRadius || '8px 0 0 8px'};
 padding:  0 0.75rem;
 background: linear-gradient(80.26deg, rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%);;
 `;
@@ -130,8 +130,8 @@ const Exchanges = ({onDropdownClick}) => {
     <FaArrowRightArrowLeft color='#fff'/>
     </CircleSwaper>
     <Section>
-    <Card>
-  <FlexBox column rowGap="0.5rem"  padding="1rem" rowGap="1.5rem">
+    <Card borderRadius='8px 0 0 8px'>
+  <FlexBox column rowGap="0.5rem"  padding="1rem" rowGap="1.5rem" >
     <FlexBox columnGap="0.5rem" align="center">
       <FlexBox
         width="50px"
@@ -143,7 +143,7 @@ const Exchanges = ({onDropdownClick}) => {
       >
         <H6 bold color="#9b9b9b">1 OF 5</H6>
       </FlexBox>
-      <H1 color="white">Start exchange</H1>
+      <H3 color="white" bold>Start exchange</H3>
     </FlexBox>
 
     <FlexBox column rowGap="0.5rem">
@@ -154,7 +154,7 @@ const Exchanges = ({onDropdownClick}) => {
           padding="1rem"
           align="center"
           justify="center"
-          backgroundColor="linear-gradient(80.26deg, rgb(42, 47, 52) 0%, rgb(31, 35, 40) 100%)"
+          backgroundColor="linear-gradient(80.26deg, rgb(42, 47, 52) -9.48%, rgb(31, 35, 40) 119.79%)"
         >
           <ImageContainer>
             <Image src="/BTC.png" alt="BTC" />
@@ -182,8 +182,8 @@ const Exchanges = ({onDropdownClick}) => {
     </FlexBox>
   </FlexBox>
 </Card>
-<Card >
-  <FlexBox column rowGap="0.5rem" padding="1rem" rowGap="1.85rem">
+<Card  borderRadius='0 8px 8px 0'>
+  <FlexBox column rowGap="0.5rem" padding="1rem" rowGap="1.75rem">
     <FlexBox columnGap="0.5rem" align="center" justify="end">
       <H5 bold color="#9b9b9b">Auto refreshes in {timeLeft} sec </H5>
       <FlexBox

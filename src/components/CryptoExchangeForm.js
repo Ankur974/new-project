@@ -22,7 +22,7 @@ const Container = styled(FlexBox)`
 
 const TabsContainer = styled(FlexBox)`
   border: 1px solid #673e60;
-  border-radius: 1rem;
+  border-radius: 0.4rem;
   padding: 4px;
   width: 100%;
 `;
@@ -31,7 +31,7 @@ const TabButton = styled.button`
   flex: 1;
   padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.4rem;
   cursor: pointer;
   font-weight: bold;
   font-size: 0.75rem;

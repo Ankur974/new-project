@@ -9,7 +9,7 @@ import tokenData from "../data/tokensData";
 
 const Container = styled(FlexBox)`
   flex-direction: column;
-  background-color: #130f29;
+  background-color: #362a3b;
   border-radius: 16px;
   padding: 1rem;
   color: white;
@@ -29,9 +29,9 @@ const Header = styled(FlexBox)`
 
 const TokenCard = styled(FlexBox)`
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-top: 1rem;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const Card = styled(FlexBox)`
@@ -205,15 +205,14 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
                 <TokenItem
                   key={index}
                   onClick={() => {
-                    // Handle chain selection - maybe filter tokens based on selected chain
                     console.log("Selected chain:", chain);
-                    setIsSelectingChain(false); // Go back to token selection after selecting chain
-                    setSearchTerm(""); // Clear search term
-                    // You might want to add logic here to filter the allTokens list based on the selected chain
+                    setIsSelectingChain(false); 
+                    setSearchTerm("");
                   }}
                 >
                   <TokenIcon>
-                    <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
+                    {/* <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} /> */}
+                    <Image src="BTC.png"/>
                   </TokenIcon>
                   <TokenDetails>
                     <TokenSymbol>{chain.chain}</TokenSymbol>
@@ -243,7 +242,9 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
           <TokenCard>
             {tokenData.slice(0, 7).map((chain, index) => (
               <Card key={index}>
-                <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} />
+                {/* <Image src={chain.tokens[0]?.tokenIcon} alt={chain.chain} /> */}
+                <Image src="BTC.png"/>
+
               </Card>
             ))}
             <MoreIndicator onClick={() => setIsSelectingChain(true)}>
@@ -254,7 +255,7 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
           <SearchContainer>
             <SearchInput
               type="text"
-              placeholder="Search by token name or address"
+              placeholder="Search by token name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -266,7 +267,9 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
             {filteredTokens.map((token, index) => (
               <TokenItem key={index} onClick={() => onSelectToken(token)}>
                 <TokenIcon>
-                  <Image src={token.tokenIcon} alt={token.tokenSymbol} />
+                  {/* <Image src={token.tokenIcon} alt={token.tokenSymbol} /> */}
+                                      <Image src="BTC.png"/>
+
                 </TokenIcon>
                 <TokenDetails>
                   <TokenSymbol>{token.tokenSymbol}</TokenSymbol>

@@ -34,8 +34,10 @@ const Logo = styled.div`
 `;
 
 const Breadcrumb = styled.div`
+display: flex;
   color: white;
   font-size: 0.9rem;
+  column-gap: 1rem;
 `;
 
 export default function RootLayout({ children }) {
@@ -47,6 +49,7 @@ export default function RootLayout({ children }) {
             <Logo>Crypto Exchange</Logo>
             <Breadcrumb>
               <Link href="/">Home</Link>
+              <Link href="/exchanges">Exchange</Link>
             </Breadcrumb>
           </Header>
           {children}
