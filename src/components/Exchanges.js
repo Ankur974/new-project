@@ -277,6 +277,11 @@ const Exchanges = ({ onDropdownClick }) => {
                   </TokenDropdown>
                 </ExchangeInfo>
               </ExchangeContainer>
+              <MinMaxContainer>
+                <MinMaxInfo>
+                  <H5 color="#fff">1 BTC ≈ 327.7599611 XMR</H5>
+                </MinMaxInfo>
+              </MinMaxContainer>
             </FlexBox>
           </FlexBox>
         </TokenCard>
