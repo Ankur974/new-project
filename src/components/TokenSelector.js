@@ -237,7 +237,7 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
               </TokenGridItem>
             ))}
             <MoreButton onClick={() => setIsSelectingChain(true)}>
-              More
+              +10
             </MoreButton>
           </TokenGrid>
 
@@ -261,7 +261,7 @@ const TokenSelector = ({ onClose, onSelectToken }) => {
                 }}
               >
                 <TokenIconWrapper>
-                  <TokenImage src={token.tokenIcon} alt={token.tokenSymbol} />
+                  <TokenImage src="BTC.png" alt={token.tokenSymbol} />
                 </TokenIconWrapper>
                 <TokenInfo>
                   <TokenSymbol>{token.tokenSymbol}</TokenSymbol>

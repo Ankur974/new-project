@@ -13,7 +13,6 @@ const RefreshIcon = styled(MdRefresh)`
 
 const ExchangeWrapper = styled(FlexBox)`
   height: 100%;
-  background-color: #191d21;
   flex-direction: column;
 `;
 
@@ -33,7 +32,6 @@ const ExchangeSection = styled(FlexBox)`
   width: 100%;
   padding: 1rem;
   border-radius: 8px;
-  align-items: center;
   justify-content: space-between;
 `;
 
@@ -92,7 +90,7 @@ const SwapButton = styled(FlexBox)`
   align-items: center;
   justify-content: center;
   left: 44.5rem;
-  top: 33rem;
+  top: 12rem;
 `;
 
 const RefreshTimer = styled.div`
@@ -272,8 +270,8 @@ const Exchanges = ({ onDropdownClick }) => {
                     <H1 color="#f5f5f5">BTC</H1>
                     <H5 color="#96a0ab">BTC</H5>
                   </TokenDetails>
-                  <TokenDropdown>
-                    <H3 color="#f5f5f5">▼</H3>
+                  <TokenDropdown onClick={() => setShowTokenSelector(true)}>
+                  <FaArrowDown color="#fff" size={16} />
                   </TokenDropdown>
                 </ExchangeInfo>
               </ExchangeContainer>
