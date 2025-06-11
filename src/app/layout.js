@@ -50,6 +50,7 @@ export default function RootLayout({ children }) {
             <Breadcrumb>
               <Link href="/">Home</Link>
               <Link href="/exchanges">Exchange</Link>
+              <Link href="/table">Table</Link>
             </Breadcrumb>
           </Header>
           {children}

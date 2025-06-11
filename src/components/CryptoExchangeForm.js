@@ -6,7 +6,7 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import FlexBox from "@/common/UI/FlexBox";
 import { Caption, H3 } from "@/common/UI/Headings";
 import TokenSelector from "./TokenSelector";
-
+import Table from "./Table";
 const FormContainer = styled(FlexBox)`
   flex-direction: column;
   background: linear-gradient(180deg, rgb(52, 57, 62) 0%, rgb(21, 25, 30) 100%);
@@ -257,15 +257,15 @@ const CryptoExchangeForm = () => {
         <PrimaryButton>VIEW OFFERS</PrimaryButton>
         <SecondaryButton>QUICK EXCHANGE</SecondaryButton>
       </ActionButtons>
-
       {isTokenSelectorOpen && (
         <TokenSelector
-          onClose={() => setIsTokenSelectorOpen(false)}
-          onSelectToken={handleTokenSelect}
+        onClose={() => setIsTokenSelectorOpen(false)}
+        onSelectToken={handleTokenSelect}
         />
       )}
     </FormContainer>
   );
+
 };
 
 export default CryptoExchangeForm;
