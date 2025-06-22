@@ -168,17 +168,19 @@ const TokenList = styled.div`
 const TokenItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding: 1rem;
   border-bottom: 1px solid ${colors.overlay.dark};
   cursor: pointer;
   transition: background-color 0.2s ease;
+  border-radius: 8px;
 
   &:hover {
     background-color: ${colors.primary.light};
   }
 `;
 
-const TokenIcon = styled.div`  width: 35px;
+const TokenIcon = styled.div`  
+width: 35px;
   height: 35px;
   background-color: transparent;
   border-radius: 50%;

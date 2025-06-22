@@ -16,6 +16,7 @@ const FormContainer = styled(FlexBox)`
   font-family: Roboto, Quicksand, "Source Sans Pro", -apple-system,
     BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   width: fit-content;
+  height: fit-content;
   row-gap: 1rem;
   position: relative;
 `;

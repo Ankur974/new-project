@@ -15,6 +15,12 @@ const TableWrapper = styled.div`
   font-family: sans-serif;
   color: white;
   overflow-x: auto;
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  height: 38rem;
+  font-family: Roboto, Quicksand, "Source Sans Pro", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 `;
 
 const StyledTable = styled.table`
@@ -206,7 +212,7 @@ const exchanges = [
   },
 ];
 
-const ExchangeTable = () => {
+const ExchangeTable = ({ onRowClick }) => {
   const [sortedData, setSortedData] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: 'save', direction: 'desc' });
 
@@ -241,10 +247,6 @@ const ExchangeTable = () => {
     return value;
   };
 
-  const handleRowClick = (exchange) => {
-    console.log('Clicked exchange:', exchange);
-  };
-
   return (
     <Wrapper align="center" justify="space-between">
       <TableWrapper>
@@ -260,7 +262,7 @@ const ExchangeTable = () => {
           </Thead>
           <tbody>
             {sortedData.map((ex, index) => (
-              <Tr key={index} highlighted={ex.isHighlighted} onClick={() => handleRowClick(ex)}>
+              <Tr key={index} highlighted={ex.isHighlighted} onClick={() => onRowClick && onRowClick(ex)}>
                 <FirstTd>
                   <Logo style={{ backgroundColor: ex.logoColor }} />
                   <Details>
