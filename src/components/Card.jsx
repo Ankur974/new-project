@@ -1,17 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { PiWaveSineBold } from "react-icons/pi";
-import {
-  Body1,
-  ButtonText,
-  Caption
-} from "@/common/UI/Headings";
+import { Body1, ButtonText, Caption } from "@/common/UI/Headings";
 import FlexBox from "@/common/UI/FlexBox";
 
 // Styled Components
 
 const BottomContainer = styled(FlexBox)`
-background-color: #fbff2d;
+  background-color: #fbff2d;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   bottom: 0;
@@ -119,8 +115,8 @@ export default function ExchangeCard({
   const displayEta = time || eta;
   const displayKycRisk = type || kycRisk;
   const displayLogo = logoColor ? undefined : logo;
+
   return (
-    <>
     <Card>
       <TopRow>
         <LogoTitle>
@@ -144,7 +140,12 @@ export default function ExchangeCard({
         <Body1 color="#fff">{displayRate}</Body1>
       </FlexBox>
 
-      <FlexBox align="center" columnGap="0.5rem" width="100%" justify="space-between">
+      <FlexBox
+        align="center"
+        columnGap="0.5rem"
+        width="100%"
+        justify="space-between"
+      >
         <InfoRow>
           <FlexBox align="center" columnGap="0.5rem">
             <ButtonText color="#a0789c">ETA:</ButtonText>
@@ -162,9 +163,7 @@ export default function ExchangeCard({
         <ExchangeBtn>Exchange</ExchangeBtn>
       </FlexBox>
 
-    <BottomContainer />
+      <BottomContainer />
     </Card>
-
-    </>
   );
 }
