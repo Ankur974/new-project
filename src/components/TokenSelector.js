@@ -60,7 +60,7 @@ const TokenCard = styled(FlexBox)`
 ;
     margin-top: 1rem;
     animation: jBcSpD 0.3s ease-out;
-    justify-content: center;
+    justify-content: ${(props) => props.justify || "center"};
     align-items: center;
 `;
 
